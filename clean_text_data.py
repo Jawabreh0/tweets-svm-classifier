@@ -1,28 +1,31 @@
 import pandas as pd
 import re
 
-def clean_text_data(input_file):
-    # Load the CSV file into a DataFrame
-    data = pd.read_csv(input_file)
-    
-    # Define a function to clean text
-    def clean_text(text):
-        text = text.replace("RT", "")  # Remove the word "RT"
-        text = re.sub(r"@\S+", "", text)  # Remove '@' and following characters until a whitespace
-        text = re.sub(r"#\S+", "", text)  # Remove '#' and following characters until a whitespace
-        text = re.sub(r"\d+", "", text)  # Remove all numbers
-        return text.strip()
-    
-    # Apply the cleaning function to each text column
-    for column in data.columns:
-        # Check if the column data type is string
-        if pd.api.types.is_string_dtype(data[column]):
-            data[column] = data[column].apply(clean_text)
-    
-    # Save the cleaned data back to the original CSV file
-    data.to_csv(input_file, index=False)
-    print(f"File '{input_file}' has been cleaned and overwritten.")
+def clean_text(text):
+    """Clean tweet text by removing mentions, hashtags, non-ASCII characters, and extra spaces."""
+    text = text.replace("RT", "")
+    text = re.sub(r"@\S+", "", text)  # Remove mentions
+    text = re.sub(r"#\S+", "", text)  # Remove hashtags
+    text = re.sub(r'[^\x00-\x7F]+', ' ', text)  # Replace non-ASCII characters with a space
+    text = re.sub(r'[^\w\s,!?\.]', '', text)  # Remove emojis and other non-text characters
+    text = re.sub(r'\s+', ' ', text)  # Replace multiple spaces with a single space
+    return text.strip()
 
-# Specify the file name
-file_name = "normal.csv"
-clean_text_data(file_name)
+def clean_tweet_data(input_output_file):
+    """Load, clean, and save tweets from a CSV file."""
+    try:
+        data = pd.read_csv(input_output_file)
+        if 'tweet' in data.columns:
+            data['tweet'] = data['tweet'].apply(clean_text)
+            # Remove tweets that are empty or have two or fewer words
+            data = data[data['tweet'].str.split().apply(len) > 2]
+            data.to_csv(input_output_file, index=False)
+            print(f"Cleaned data saved successfully to '{input_output_file}'.")
+        else:
+            print("No 'tweet' column found in the dataset.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Specify the input and output file path
+file_path = 'main-tweets-dataset.csv'
+clean_tweet_data(file_path)
