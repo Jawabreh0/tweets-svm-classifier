@@ -12,6 +12,6 @@ def truncate_after_row(input_file, row_limit):
     print(f"File '{input_file}' has been truncated after row {row_limit}.")
 
 # Specify the file name and the row limit
-file_name = "normal.csv"
-row_limit = 24154
+file_name = "harmful.csv"
+row_limit = 23590
 truncate_after_row(file_name, row_limit)
