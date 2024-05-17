@@ -23,16 +23,16 @@ This project is an SVM (Support Vector Machine) classifier implemented in Python
 
 - **Evaluation Report** : The models accuracy is 92.41%, below is a full report of the evaluation where you can find the recision, recall, and f1 score.
 
-![evaluation/evaluation-report.png](evaluation/evaluation-report.png)
+![evaluation/evaluation-report.png](/evaluation/evaluation-report.png)
 
 
 - **Precision, Recall, and F1-Score** :
   
-![evaluation/precision-recall-f1.png](evaluation/precision-recall-f1.png)
+![evaluation/precision-recall-f1.png](/evaluation/precision-recall-f1.png)
 
 - **Confusion Metrix**:
   
-![evaluation/confusion-metrix.png](evaluation/confusion-metrix.png)
+![evaluation/confusion-metrix.png](/evaluation/confusion-metrix.png)
 
 ## Installation
 
