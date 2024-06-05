@@ -24,6 +24,9 @@ logging.info("Combining datasets...")
 train_df = pd.concat([normal_train, harmful_train], ignore_index=True)
 logging.info("Datasets combined successfully.")
 
+# Handle missing values in the 'tweet' column
+train_df['tweet'].fillna('', inplace=True)
+
 # Step 2: Vectorization
 logging.info("Vectorizing data...")
 vectorizer = TfidfVectorizer(max_features=1000)  # Adjust this value as needed
