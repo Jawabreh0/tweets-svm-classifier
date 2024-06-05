@@ -21,7 +21,7 @@ This project is an SVM (Support Vector Machine) classifier implemented in Python
 ## Evaluation Results
  At the end we used 3591 tweets for each label, amounting to a total of 7182 tweets. 
 
-- **Evaluation Report** : The models accuracy is 92.41%, below is a full report of the evaluation where you can find the recision, recall, and f1 score.
+- **Evaluation Report** : The models accuracy is 96.92%, below is a full report of the evaluation where you can find the recision, recall, and f1 score.
 
 ![evaluation/evaluation-report.png](./evaluation/evaluation-report.png)
 
